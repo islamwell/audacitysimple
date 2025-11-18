@@ -1174,15 +1174,18 @@ void OnTrackMoveBottom(const CommandContext& context)
 using namespace MenuRegistry;
 auto TracksMenu()
 {
-    // Tracks Menu (formerly Project Menu)
+    // VOICE EDITOR: Simplified Tracks Menu for single-track voice recording
     static auto menu = std::shared_ptr{
         Menu(wxT("Tracks"), XXO("&Tracks"),
-             Section("Add",
-                     Menu(wxT("Add"), XXO("Add &New"))
-                     ),
+             // VOICE EDITOR: Hide "Add New" menu - single track workflow
+             // Section("Add",
+             //         Menu(wxT("Add"), XXO("Add &New"))
+             //         ),
 
              //////////////////////////////////////////////////////////////////////////
 
+             // VOICE EDITOR: Hide Mix menu - not needed for single track
+             /*
              Section("",
                      Menu(wxT("Mix"), XXO("Mi&x"),
                           // Delayed evaluation
@@ -1214,13 +1217,16 @@ auto TracksMenu()
                      Command(wxT("Resample"), XXO("&Resample..."), OnResample,
                              AudioIONotBusyFlag() | WaveTracksSelectedFlag())
                      ),
+             */
 
              Section("",
                      Command(wxT("RemoveTracks"), XXO("Remo&ve Tracks"), OnRemoveTracks,
                              AudioIONotBusyFlag() | AnyTracksSelectedFlag())
-                     ),
+                     )
 
-             Section("",
+             // VOICE EDITOR: Hide multi-track features (Mute/Unmute, Pan, Align, Sort, Sync-Lock)
+             /*
+             ,Section("",
                      Menu(wxT("Mute"), XXO("M&ute/Unmute"),
                           Command(wxT("MuteAllTracks"), XXO("&Mute All Tracks"),
                                   OnMuteAllTracks, TracksExistFlag(), wxT("Ctrl+U")),
@@ -1308,12 +1314,12 @@ auto TracksMenu()
                      //////////////////////////////////////////////////////////////////////////
                      ),
 
-             Section("",
+             ,Section("",
                      Command(wxT("SyncLock"), XXO("Keep tracks synchronized (Sync-&Lock)"),
                              OnSyncLock, AlwaysEnabledFlag,
                              Options {}.CheckTest(SyncLockTracks))
                      )
-
+             */
              ) };
     return menu;
 }

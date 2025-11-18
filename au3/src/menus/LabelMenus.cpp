@@ -806,14 +806,15 @@ auto LabelEditMenus()
     return menus;
 }
 
-AttachedItem sAttachment1{ Indirect(LabelEditMenus()),
-                           { wxT("Edit/Other"),
-                             { OrderingHint::Before, wxT("EditMetaData") } }
-};
+// VOICE EDITOR: Hide Label menu items - not needed for voice recording
+// AttachedItem sAttachment1{ Indirect(LabelEditMenus()),
+//                            { wxT("Edit/Other"),
+//                              { OrderingHint::Before, wxT("EditMetaData") } }
+// };
 
-AttachedItem sAttachment2{
-    Command(wxT("NewLabelTrack"), XXO("&Label Track"),
-            OnNewLabelTrack, AudioIONotBusyFlag()),
-    wxT("Tracks/Add/Add")
-};
+// AttachedItem sAttachment2{
+//     Command(wxT("NewLabelTrack"), XXO("&Label Track"),
+//             OnNewLabelTrack, AudioIONotBusyFlag()),
+//     wxT("Tracks/Add/Add")
+// };
 }

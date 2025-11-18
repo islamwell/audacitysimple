@@ -335,7 +335,8 @@ static const ReservedCommandFlag
     return flag;
 }                  //lll
 
-AttachedItem sAttachment1{ Indirect(GenerateMenu()) };
+// VOICE EDITOR: Hide Generate menu - not needed for voice recording
+// AttachedItem sAttachment1{ Indirect(GenerateMenu()) };
 
 const ReservedCommandFlag&
 HasLastEffectFlag()
@@ -501,7 +502,8 @@ auto AnalyzeMenu()
     return menu;
 }
 
-AttachedItem sAttachment3{ Indirect(AnalyzeMenu()) };
+// VOICE EDITOR: Hide Analyze menu - not needed for voice recording
+// AttachedItem sAttachment3{ Indirect(AnalyzeMenu()) };
 
 auto ToolsMenu()
 {
@@ -585,5 +587,6 @@ auto ToolsMenu()
     return menu;
 }
 
-AttachedItem sAttachment4{ Indirect(ToolsMenu()) };
+// VOICE EDITOR: Hide Tools menu - simplified interface for voice recording
+// AttachedItem sAttachment4{ Indirect(ToolsMenu()) };
 }
