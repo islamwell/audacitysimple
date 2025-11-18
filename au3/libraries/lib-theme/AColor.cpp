@@ -858,3 +858,129 @@ void AColor::ApplyUpdatedImages()
     ReInit();
     theTheme.Publish({});
 }
+
+// Modern UI drawing utilities implementation
+
+void AColor::DrawRoundedRectangle(wxDC& dc, const wxRect& rect, double radius,
+                                   int fillColor, int borderColor)
+{
+    auto gc = wxGraphicsContext::Create(dc);
+    if (!gc) return;
+
+    gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
+    // Create rounded rectangle path
+    auto path = gc->CreatePath();
+    path.AddRoundedRectangle(rect.x, rect.y, rect.width, rect.height, radius);
+
+    // Fill
+    if (fillColor != -1) {
+        wxColour fillCol = theTheme.Colour(fillColor);
+        gc->SetBrush(wxBrush(fillCol));
+        gc->FillPath(path);
+    }
+
+    // Border
+    if (borderColor != -1) {
+        wxColour borderCol = theTheme.Colour(borderColor);
+        gc->SetPen(wxPen(borderCol, 1));
+        gc->StrokePath(path);
+    }
+
+    delete gc;
+}
+
+void AColor::DrawRoundedRectangle(wxGraphicsContext* gc, const wxRect& rect, double radius,
+                                   int fillColor, int borderColor)
+{
+    if (!gc) return;
+
+    gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
+    // Create rounded rectangle path
+    auto path = gc->CreatePath();
+    path.AddRoundedRectangle(rect.x, rect.y, rect.width, rect.height, radius);
+
+    // Fill
+    if (fillColor != -1) {
+        wxColour fillCol = theTheme.Colour(fillColor);
+        gc->SetBrush(wxBrush(fillCol));
+        gc->FillPath(path);
+    }
+
+    // Border
+    if (borderColor != -1) {
+        wxColour borderCol = theTheme.Colour(borderColor);
+        gc->SetPen(wxPen(borderCol, 1));
+        gc->StrokePath(path);
+    }
+}
+
+void AColor::DrawSoftShadow(wxDC& dc, const wxRect& rect, int blurRadius,
+                            int offsetX, int offsetY)
+{
+    auto gc = wxGraphicsContext::Create(dc);
+    if (!gc) return;
+
+    gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
+    // Draw multiple layers with decreasing opacity for blur effect
+    const int layers = std::min(blurRadius / 2, 6);  // Limit layers for performance
+    for (int i = layers; i > 0; i--) {
+        int alpha = 10 * i / layers;  // Fade out from center
+        wxColour shadowColor(0, 0, 0, alpha);
+
+        wxRect shadowRect = rect;
+        shadowRect.Offset(offsetX, offsetY);
+        shadowRect.Inflate(i * 2, i * 2);
+
+        auto path = gc->CreatePath();
+        path.AddRoundedRectangle(
+            shadowRect.x, shadowRect.y,
+            shadowRect.width, shadowRect.height,
+            8.0 + i);  // Increase radius for outer layers
+
+        gc->SetBrush(wxBrush(shadowColor));
+        gc->SetPen(*wxTRANSPARENT_PEN);
+        gc->FillPath(path);
+    }
+
+    delete gc;
+}
+
+void AColor::DrawGradientRoundedRect(wxDC& dc, const wxRect& rect, double radius,
+                                      int colorTop, int colorBottom, bool vertical)
+{
+    auto gc = wxGraphicsContext::Create(dc);
+    if (!gc) return;
+
+    gc->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+
+    // Create gradient brush
+    wxColour topCol = theTheme.Colour(colorTop);
+    wxColour bottomCol = theTheme.Colour(colorBottom);
+
+    wxGraphicsBrush brush;
+    if (vertical) {
+        brush = gc->CreateLinearGradientBrush(
+            rect.x, rect.y,
+            rect.x, rect.y + rect.height,
+            topCol, bottomCol);
+    } else {
+        brush = gc->CreateLinearGradientBrush(
+            rect.x, rect.y,
+            rect.x + rect.width, rect.y,
+            topCol, bottomCol);
+    }
+
+    // Create rounded rectangle path
+    auto path = gc->CreatePath();
+    path.AddRoundedRectangle(rect.x, rect.y, rect.width, rect.height, radius);
+
+    // Fill with gradient
+    gc->SetBrush(brush);
+    gc->SetPen(*wxTRANSPARENT_PEN);
+    gc->FillPath(path);
+
+    delete gc;
+}

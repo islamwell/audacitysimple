@@ -670,6 +670,13 @@ void TrackArt::DrawBackgroundWithSelection(
     auto& track = *pTrack;
     BeatsGridlinePainter gridlinePainter(zoomInfo, GetProject(track));
 
+    // Modern UI: Draw soft shadow behind track
+    wxRect shadowRect = rect;
+    shadowRect.Deflate(4, 2);  // Inset slightly from edges
+    if (shadowRect.width > 0 && shadowRect.height > 0) {
+        AColor::DrawSoftShadow(*dc, shadowRect, 8, 0, 2);
+    }
+
     dc->SetPen(*wxTRANSPARENT_PEN);
 
     const auto& beatStrongBrush = artist->beatStrongBrush[useBeatsAlternateColor];
@@ -685,9 +692,29 @@ void TrackArt::DrawBackgroundWithSelection(
         const wxBrush& beatWeakBrush, const wxRect& subRect)
     {
         if (!gridlinePainter.enabled) {
-            // Track not selected; just draw background
-            dc->SetBrush(regularBrush);
-            dc->DrawRectangle(subRect);
+            // Modern UI: Draw background with rounded corners
+            auto gc = wxGraphicsContext::Create(*dc);
+            if (gc) {
+                gc->SetBrush(regularBrush);
+                gc->SetPen(*wxTRANSPARENT_PEN);
+
+                // Only apply rounded corners at track edges to avoid gaps
+                double radius = 6.0;
+                auto path = gc->CreatePath();
+
+                // Use full rounded rectangle for cleaner look
+                path.AddRoundedRectangle(
+                    subRect.x, subRect.y,
+                    subRect.width, subRect.height,
+                    radius);
+
+                gc->FillPath(path);
+                delete gc;
+            } else {
+                // Fallback if graphics context unavailable
+                dc->SetBrush(regularBrush);
+                dc->DrawRectangle(subRect);
+            }
         } else {
             gridlinePainter.DrawBackground(
                 *dc, subRect, rect, beatStrongBrush, beatWeakBrush);

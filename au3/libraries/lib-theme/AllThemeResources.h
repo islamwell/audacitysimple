@@ -274,22 +274,22 @@ DEFINE_IMAGE(bmpCogwheel, wxImage(20, 20), wxT("Cogwheel"));
 DEFINE_IMAGE(bmpCloud, wxImage(20, 20), wxT("Cloud"));
 DEFINE_IMAGE(bmpCloudProgress, wxImage(20, 20), wxT("CloudProgress"));
 
-DEFINE_COLOUR(clrBlank,      wxColour(64,  64,  64), wxT("Blank"));
-DEFINE_COLOUR(clrUnselected, wxColour(30,  30,  30), wxT("Unselected"));
-DEFINE_COLOUR(clrSelected,   wxColour(93,  65,  93), wxT("Selected"));
-DEFINE_COLOUR(clrSample,     wxColour(63,  77, 155), wxT("Sample"));
+DEFINE_COLOUR(clrBlank,      wxColour(42,  42,  42), wxT("Blank"));  // Modern dark background
+DEFINE_COLOUR(clrUnselected, wxColour(32,  32,  32), wxT("Unselected"));  // Darker unselected
+DEFINE_COLOUR(clrSelected,   wxColour(52,  52,  62), wxT("Selected"));  // Subtle blue-grey selection
+DEFINE_COLOUR(clrSample,     wxColour(0,  132, 255), wxT("Sample"));  // Modern blue waveform
 DEFINE_COLOUR(clrSample2,    wxColour(160,  10,  10), wxT("Sample2"));
 DEFINE_COLOUR(clrSample3,    wxColour(35, 110,  35), wxT("Sample3"));
 DEFINE_COLOUR(clrSample4,    wxColour(0,   0,   0), wxT("Sample4"));
-DEFINE_COLOUR(clrSelSample,  wxColour(50,  50, 200), wxT("SelSample"));
+DEFINE_COLOUR(clrSelSample,  wxColour(0,  162, 255), wxT("SelSample"));  // Brighter blue when selected
 DEFINE_COLOUR(clrDragSample, wxColour(0, 100,   0), wxT("DragSample"));
 
-DEFINE_COLOUR(clrMuteSample, wxColour(136, 136, 144), wxT("MuteSample"));
-DEFINE_COLOUR(clrRms,        wxColour(107, 154, 247), wxT("Rms"));
+DEFINE_COLOUR(clrMuteSample, wxColour(100, 100, 100), wxT("MuteSample"));  // Softer muted grey
+DEFINE_COLOUR(clrRms,        wxColour(0,  152, 255), wxT("Rms"));  // Modern blue RMS
 DEFINE_COLOUR(clrRms2,       wxColour(230,  80,  80), wxT("Rms2"));
 DEFINE_COLOUR(clrRms3,       wxColour(75, 200,  75), wxT("Rms3"));
 DEFINE_COLOUR(clrRms4,       wxColour(100, 100, 100), wxT("Rms4"));
-DEFINE_COLOUR(clrMuteRms,    wxColour(136, 136, 144), wxT("MuteRms"));
+DEFINE_COLOUR(clrMuteRms,    wxColour(100, 100, 100), wxT("MuteRms"));  // Softer muted RMS
 
 DEFINE_COLOUR(clrAboutBoxBackground,  wxColour(255, 255, 255),  wxT("AboutBackground"));
 DEFINE_COLOUR(clrTrackPanelText,      wxColour(200, 200, 200),  wxT("TrackPanelText"));
@@ -350,13 +350,13 @@ DEFINE_COLOUR(clrSnapGuide,            wxColour(255, 255,   0),  wxT("SnapGuide"
 DEFINE_COLOUR(clrTrackInfo,            wxColour(64,  64,  64),  wxT("TrackInfo"));
 DEFINE_COLOUR(clrTrackInfoSelected,    wxColour(93,  65,  93),  wxT("TrackInfoSelected"));
 
-DEFINE_COLOUR(clrLight,                wxColour(60,  60,  60),  wxT("Light"));
-DEFINE_COLOUR(clrMedium,               wxColour(43,  43,  43),  wxT("Medium"));
-DEFINE_COLOUR(clrDark,                 wxColour(20,  20,  20),  wxT("Dark"));
+DEFINE_COLOUR(clrLight,                wxColour(52,  52,  52),  wxT("Light"));  // Modern light grey
+DEFINE_COLOUR(clrMedium,               wxColour(42,  42,  42),  wxT("Medium"));  // Modern medium grey
+DEFINE_COLOUR(clrDark,                 wxColour(32,  32,  32),  wxT("Dark"));  // Modern dark grey
 
-DEFINE_COLOUR(clrLightSelected,        wxColour(93,  65,  93),  wxT("LightSelected"));
-DEFINE_COLOUR(clrMediumSelected,       wxColour(93,  43,  93),  wxT("MediumSelected"));
-DEFINE_COLOUR(clrDarkSelected,         wxColour(93,  20,  93),  wxT("DarkSelected"));
+DEFINE_COLOUR(clrLightSelected,        wxColour(52,  52,  72),  wxT("LightSelected"));  // Subtle blue tint
+DEFINE_COLOUR(clrMediumSelected,       wxColour(45,  45,  65),  wxT("MediumSelected"));  // Subtle blue tint
+DEFINE_COLOUR(clrDarkSelected,         wxColour(38,  38,  58),  wxT("DarkSelected"));  // Subtle blue tint
 
 DEFINE_COLOUR(clrClipped,    wxColour(255,   0,   0), wxT("Clipped"));
 DEFINE_COLOUR(clrMuteClipped, wxColour(136, 136, 144), wxT("MuteClipped"));
@@ -371,7 +371,7 @@ DEFINE_COLOUR(clrBlankSelected, wxColour(170, 170, 192), wxT("BlankSelected"));
 DEFINE_COLOUR(clrSliderLight,         wxColour(1,   1,   1),  wxT("SliderLight"));
 DEFINE_COLOUR(clrSliderMain,          wxColour(43,  43,  43),  wxT("SliderMain"));
 DEFINE_COLOUR(clrSliderDark,          wxColour(1,   1,   1),  wxT("SliderDark"));
-DEFINE_COLOUR(clrTrackBackground,     wxColour(20,  20,  20),  wxT("TrackBackground"));
+DEFINE_COLOUR(clrTrackBackground,     wxColour(36,  36,  36),  wxT("TrackBackground"));  // Modern track background
 
 DEFINE_COLOUR(clrGraphLabels,         wxColour(0,    0,   0),  wxT("GraphLabels"));
 DEFINE_COLOUR(clrSpectroBackground,   wxColour(255,  255,  20),  wxT("SpectroBackground"));
@@ -421,3 +421,19 @@ DEFINE_COLOUR(clrLoopDisabled,         wxColour(93,  65,  93),   wxT("LoopNotEna
 DEFINE_COLOUR(clrGrabber,              wxColour(93,  65,  93),   wxT("Grabber"));
 
 DEFINE_COLOUR(clrTimelineRulerBackground, wxColour(0xE9, 0xE9, 0xEB), wxT("TimelineRulerBackground"));
+
+// Modern UI Colors for Voice Editor
+DEFINE_COLOUR(clrModernBackground,     wxColour(42,  42,  42),  wxT("ModernBackground"));
+DEFINE_COLOUR(clrModernBackgroundLight, wxColour(52,  52,  52),  wxT("ModernBackgroundLight"));
+DEFINE_COLOUR(clrModernBackgroundDark,  wxColour(32,  32,  32),  wxT("ModernBackgroundDark"));
+DEFINE_COLOUR(clrModernAccent,          wxColour(0,  132, 255),  wxT("ModernAccent"));
+DEFINE_COLOUR(clrModernAccentHover,     wxColour(0,  152, 255),  wxT("ModernAccentHover"));
+DEFINE_COLOUR(clrModernAccentPressed,   wxColour(0,  112, 215),  wxT("ModernAccentPressed"));
+DEFINE_COLOUR(clrModernText,            wxColour(255, 255, 255),  wxT("ModernText"));
+DEFINE_COLOUR(clrModernTextSecondary,   wxColour(180, 180, 180),  wxT("ModernTextSecondary"));
+DEFINE_COLOUR(clrModernBorder,          wxColour(85,  85,  85),  wxT("ModernBorder"));
+DEFINE_COLOUR(clrModernBorderLight,     wxColour(105, 105, 105),  wxT("ModernBorderLight"));
+DEFINE_COLOUR(clrModernShadow,          wxColour(0,   0,   0,  38),  wxT("ModernShadow"));  // 15% alpha
+DEFINE_COLOUR(clrModernShadowStrong,    wxColour(0,   0,   0,  77),  wxT("ModernShadowStrong"));  // 30% alpha
+DEFINE_COLOUR(clrModernWaveform,        wxColour(0,  132, 255),  wxT("ModernWaveform"));
+DEFINE_COLOUR(clrModernWaveformRMS,     wxColour(0,  152, 255),  wxT("ModernWaveformRMS"));

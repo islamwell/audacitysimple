@@ -67,6 +67,16 @@ public:
     static void UseThemeColour(wxGraphicsContext* gc, int iBrush, int iPen=-1, int alpha = 255);
     static void TrackPanelBackground(wxDC* dc, bool selected);
 
+    // Modern UI drawing utilities
+    static void DrawRoundedRectangle(wxDC& dc, const wxRect& rect, double radius,
+                                      int fillColor, int borderColor = -1);
+    static void DrawRoundedRectangle(wxGraphicsContext* gc, const wxRect& rect, double radius,
+                                      int fillColor, int borderColor = -1);
+    static void DrawSoftShadow(wxDC& dc, const wxRect& rect, int blurRadius = 12,
+                               int offsetX = 0, int offsetY = 4);
+    static void DrawGradientRoundedRect(wxDC& dc, const wxRect& rect, double radius,
+                                         int colorTop, int colorBottom, bool vertical = true);
+
     static void Light(wxDC* dc, bool selected, bool highlight = false);
     static void Medium(wxDC* dc, bool selected);
     static void MediumTrackInfo(wxDC* dc, bool selected);
